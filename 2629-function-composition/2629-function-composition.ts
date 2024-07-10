@@ -1,13 +1,8 @@
 type F = (x: number) => number;
 
-function compose(functions: F[]): F {
-    
-    return function(x) {        
-        let val = x;             
-        functions.reverse().forEach((func, i) => {            
-            val = func(val);                           
-        })
-        return val;
+function compose(functions: F[]): F {    
+    return function(x) {
+        return functions.reduceRight((acc, curr) => curr(acc), x);              
     }
 };
 
